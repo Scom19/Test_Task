@@ -70,7 +70,7 @@ class Derivativetask(task):
             b = random.randint(2, 5)
             self.prompt_text = f"Найдите производную функции f(x) = {a}*x^{b}"
             self.solution = f"{a * b}*x^{b - 1}"
-            self.hint = "Используйте правило степени: (C*x^n)' = C*n*x^(n-1)"
+            self.hint = "Вспомните правило степени для производной"
             self.explanation = "Примените правило степени: (C*x^n)' = C*n*x^(n-1). Умножьте коэффициент на степень и уменьшите степень на 1."
 
         elif self.difficulty == 3:
@@ -83,12 +83,12 @@ class Derivativetask(task):
             if trig_func == 'sin':
                 self.prompt_text = f"Найдите производную функции f(x) = {a}*sin({b}*x + {c})\n(ответ дайте в формате, например: 10*cos(2*x+3))"
                 self.solution = f"{a * b}*cos({b}*x+{c})"
-                self.hint = "Используйте правило цепочки и помните, что производная от sin(u) равна cos(u)*u'"
+                self.hint = "Используйте правило цепочки и вспомните, чему равна производная от sin(u)"
                 self.explanation = "Примените правило цепочки (f(g(x)))' = f'(g(x))*g'(x). Производная от sin(u) равна cos(u)*u'. Здесь u = bx + c, поэтому u' = b."
             else:  # cos
                 self.prompt_text = f"Найдите производную функции f(x) = {a}*cos({b}*x + {c})\n(ответ дайте в формате, например: -10*sin(2*x+3))"
                 self.solution = f"{-a * b}*sin({b}*x+{c})"
-                self.hint = "Используйте правило цепочки и помните, что производная от cos(u) равна -sin(u)*u'"
+                self.hint = "Используйте правило цепочки и вспомните, чему равна производная от cos(u)"
                 self.explanation = "Примените правило цепочки (f(g(x)))' = f'(g(x))*g'(x). Производная от cos(u) равна -sin(u)*u'. Здесь u = bx + c, поэтому u' = b."
 
     def check_answer(self, user_answer):
@@ -207,7 +207,7 @@ class Probabilitytask(task):
             success = random.randint(2, total - 2)
             self.prompt_text = f"В корзине {total} шаров, из них {success} красных. Какова вероятность вынуть красный шар? (ответ округлите до 2 знаков после запятой)"
             self.solution = str(round(success / total, 2))
-            self.hint = "Вероятность = (Количество благоприятных исходов) / (Общее количество исходов)"
+            self.hint = "Вспомните классическое определение вероятности"
             self.explanation = f"Вероятность = {success} / {total} = {round(success / total, 2)}. Это отношение количества красных шаров к общему количеству шаров."
         elif self.difficulty == 2:
             sides = 6
@@ -225,7 +225,7 @@ class Probabilitytask(task):
             p1 = red / total
             p2 = (red - 1) / (total - 1)
             self.solution = str(round(p1 * p2, 3))
-            self.hint = "Это зависимые события. P(A и B) = P(A) * P(B|A)"
+            self.hint = "Вспомните формулу зависимых событий."
             self.explanation = f"Это зависимые события. P(A и B) = P(A) * P(B|A), где P(B|A) - вероятность второго события после первого. P = ({red}/{total}) * ({(red-1)}/{(total-1)}) = {round(p1 * p2, 3)}."
 
     def check_answer(self, user_answer):
@@ -259,21 +259,21 @@ class Combinatoricstask(task):
             n = random.randint(4, 7)
             self.prompt_text = f"Сколькими способами можно расставить {n} разных книг на полке?"
             self.solution = str(math.factorial(n))
-            self.hint = f"Это число перестановок, которое равно n! ({n}!)"
+            self.hint = f"Посчитайте число перестановок ({n}!)"
             self.explanation = f"Это число перестановок, которое равно n! ({n}!). {n}! = {math.factorial(n)}."
         elif self.difficulty == 2:
             n = random.randint(5, 10)
             k = random.randint(2, 4)
             self.prompt_text = f"Сколькими способами можно выбрать {k} человека на {k} разные должности из {n} кандидатов?"
             self.solution = str(math.perm(n, k))
-            self.hint = "Порядок важен, поэтому используем размещения: A(n, k) = n! / (n-k)!"
+            self.hint = "Порядок важен, поэтому используем размещения!"
             self.explanation = f"Порядок важен, поэтому используем размещения: A(n, k) = n! / (n-k)!. A({n}, {k}) = {n}! / ({n}-{k})! = {math.perm(n, k)}."
         elif self.difficulty == 3:
             n = random.randint(10, 15)
             k = random.randint(3, 5)
             self.prompt_text = f"Сколькими способами можно выбрать команду из {k} человек из группы в {n} человек?"
             self.solution = str(math.comb(n, k))
-            self.hint = "Порядок не важен, поэтому используем сочетания: C(n, k) = n! / (k! * (n-k)!)"
+            self.hint = "Порядок не важен, поэтому используем сочетания!"
             self.explanation = f"Порядок не важен, поэтому используем сочетания: C(n, k) = n! / (k! * (n-k)!). C({n}, {k}) = {n}! / ({k}! * ({n}-{k})!) = {math.comb(n, k)}."
             self.n, self.k = n, k  # Сохраняем для анализа ответа
 
@@ -309,7 +309,7 @@ class Sequencetask(task):
             seq = [start + i * step for i in range(4)]
             self.prompt_text = f"Найдите следующий член в последовательности: {', '.join(map(str, seq))}, ..."
             self.solution = str(seq[-1] + step)
-            self.hint = f"Это арифметическая прогрессия с шагом {step}"
+            self.hint = f"Это арифметическая прогрессия с каким-то шагом."
             self.explanation = f"Это арифметическая прогрессия с шагом {step}. Каждый следующий член получается прибавлением {step} к предыдущему. Следующий член: {seq[-1]} + {step} = {seq[-1] + step}."
         elif self.difficulty == 2:
             # Геометрическая
@@ -317,7 +317,7 @@ class Sequencetask(task):
             seq = [start * (ratio ** i) for i in range(4)]
             self.prompt_text = f"Найдите следующий член в последовательности: {', '.join(map(str, seq))}, ..."
             self.solution = str(seq[-1] * ratio)
-            self.hint = f"Это геометрическая прогрессия, каждый член умножается на {ratio}"
+            self.hint = f"Это геометрическая прогрессия."
             self.explanation = f"Это геометрическая прогрессия, каждый член умножается на {ratio}. Следующий член: {seq[-1]} * {ratio} = {seq[-1] * ratio}."
         elif self.difficulty == 3:
             # Квадратичная
@@ -326,7 +326,7 @@ class Sequencetask(task):
             seq = [a * (n ** 2) + b for n in range(1, 5)]
             self.prompt_text = f"Найдите следующий член в последовательности: {', '.join(map(str, seq))}, ..."
             self.solution = str(a * (5 ** 2) + b)
-            self.hint = f"Последовательность задана формулой a*n^2 + b, где n - номер члена"
+            self.hint = f"Кажется, что элементы последотальности зависят от квадрата номера элемента и одной дополнительной постоянной величины"
             self.explanation = f"Последовательность задана формулой a*n^2 + b, где n - номер члена. Здесь a={a}, b={b}. Следующий член (n=5): {a}*5^2 + {b} = {a * 25} + {b} = {a * (5 ** 2) + b}."
 
 
